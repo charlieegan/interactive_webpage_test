@@ -22,7 +22,7 @@
     <select id="dataset-selector" onchange="updatePlot()">
         <option value="dataset1">Linear Growth Trend</option>
         <option value="dataset2">Exponential Curve</option>
-        <option value="dataset3">Random Sine Wave Scatter</option>
+        <option value="dataset3">Scatter Wave</option>
     </select>
 
     <!-- The target div where Plotly will inject the interactive chart -->
@@ -30,28 +30,28 @@
 </div>
 
 <script>
-    // Define your various datasets in JSON format
+    // Fixed: Added numeric coordinate arrays to make the plots work instantly
     const datasets = {
         dataset1: {
-            x: [1, 2, 3, 4, 5],
-            y: [10, 15, 13, 17, 22],
+            x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            y: [10, 15, 22, 29, 35, 41, 50, 58, 64, 75],
             title: 'Linear Growth Trend',
             type: 'scatter',
             mode: 'lines+markers',
             color: '#1f77b4'
         },
         dataset2: {
-            x: [1, 2, 3, 4, 5],
-            y: [2, 4, 16, 64, 256],
+            x: [1, 2, 3, 4, 5, 6, 7, 8],
+            y: [2, 4, 8, 16, 32, 64, 128, 256],
             title: 'Exponential Curve',
             type: 'scatter',
             mode: 'lines',
             color: '#ff7f0e'
         },
         dataset3: {
-            x: [1, 2, 3, 4, 5, 6, 7, 8],
-            y: [5, 9, 2, 7, 5, 1, 8, 3],
-            title: 'Random Sine Wave Scatter',
+            x: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6],
+            y: [0, 0.9, 0.9, 0.1, -0.8, -1, -0.3, 0.6, 1, 0.5, -0.5],
+            title: 'Scatter Wave',
             type: 'scatter',
             mode: 'markers',
             color: '#2ca02c'
