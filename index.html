@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Data Plotter</title>
+    <!-- Load Plotly.js CDN directly -->
+    <script src="https://plot.ly" charset="utf-8"></script>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f7f6; color: #333; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        select { padding: 10px; font-size: 16px; border-radius: 4px; margin-bottom: 20px; width: 100%; max-width: 300px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Interactive Data Plotter</h1>
+    <p>Select a data set to plot dynamically:</p>
+    
+    <!-- Dropdown menu for datasets -->
+    <select id="dataset-selector" onchange="updatePlot()">
+        <option value="dataset1">Linear Growth Trend</option>
+        <option value="dataset2">Exponential Curve</option>
+        <option value="dataset3">Random Sine Wave Scatter</option>
+    </select>
+
+    <!-- The target div where Plotly will inject the interactive chart -->
+    <div id="plot-window" style="width:100%; height:500px;"></div>
+</div>
+
+<script>
+    // Define your various datasets in JSON format
+    const datasets = {
+        dataset1: {
+            x: [1, 2, 3, 4, 5],
+            y: [10, 15, 13, 17, 22],
+            title: 'Linear Growth Trend',
+            type: 'scatter',
+            mode: 'lines+markers',
+            color: '#1f77b4'
+        },
+        dataset2: {
+            x: [1, 2, 3, 4, 5],
+            y: [2, 4, 16, 64, 256],
+            title: 'Exponential Curve',
+            type: 'scatter',
+            mode: 'lines',
+            color: '#ff7f0e'
+        },
+        dataset3: {
+            x: [1, 2, 3, 4, 5, 6, 7, 8],
+            y: [5, 9, 2, 7, 5, 1, 8, 3],
+            title: 'Random Sine Wave Scatter',
+            type: 'scatter',
+            mode: 'markers',
+            color: '#2ca02c'
+        }
+    };
+
+    function updatePlot() {
+        const selectedKey = document.getElementById('dataset-selector').value;
+        const dataConfig = datasets[selectedKey];
+
+        const trace = {
+            x: dataConfig.x,
+            y: dataConfig.y,
+            mode: dataConfig.mode,
+            type: dataConfig.type,
+            marker: { color: dataConfig.color, size: 10 },
+            line: { color: dataConfig.color, width: 3 }
+        };
+
+        const layout = {
+            title: dataConfig.title,
+            xaxis: { title: 'X Axis Variable' },
+            yaxis: { title: 'Y Axis Variable' },
+            margin: { t: 50, b: 50, l: 50, r: 50 }
+        };
+
+        // Render the plot dynamically inside the target element
+        Plotly.newPlot('plot-window', [trace], layout);
+    }
+
+    // Initialize the window with the default plot selection
+    updatePlot();
+</script>
+
+</body>
+</html>
